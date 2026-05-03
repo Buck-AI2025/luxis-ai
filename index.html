@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Receptionist Blueprint — Luxis AI</title>
+  <meta name="description" content="Never miss a medspa appointment again. AI that answers calls, qualifies leads, and books appointments 24/7. Join the founding member community.">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --black: #0a0a0a;
+      --white: #fafafa;
+      --gold: #c9a84c;
+      --gold-light: #e8c97a;
+      --gray: #888;
+      --dark-gray: #1a1a1a;
+      --border: rgba(201, 168, 76, 0.2);
+    }
+
+    body {
+      font-family: 'Georgia', serif;
+      background: var(--black);
+      color: var(--white);
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .logo {
+      font-size: 1.1rem;
+      font-family: 'Arial', sans-serif;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+      font-weight: 300;
+    }
+    .nav-cta {
+      background: var(--gold);
+      color: var(--black);
+      padding: 10px 24px;
+      text-decoration: none;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* HERO */
+    .hero {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 100px 40px 80px;
+      text-align: center;
+    }
+    .hero-tag {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      line-height: 1.15;
+      font-weight: 400;
+      margin-bottom: 28px;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+    .hero-sub {
+      font-family: 'Arial', sans-serif;
+      font-size: 1.1rem;
+      color: #bbb;
+      max-width: 560px;
+      margin: 0 auto 40px;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+    .cta-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .btn-primary {
+      background: var(--gold);
+      color: var(--black);
+      padding: 18px 48px;
+      text-decoration: none;
+      font-family: 'Arial', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      display: inline-block;
+      transition: background 0.2s;
+    }
+    .btn-primary:hover { background: var(--gold-light); }
+    .cta-note {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+    .spots-left {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.8rem;
+      color: #e8714a;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    /* PROOF BAR */
+    .proof-bar {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 28px 40px;
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      flex-wrap: wrap;
+    }
+    .proof-item {
+      text-align: center;
+    }
+    .proof-num {
+      font-size: 2rem;
+      color: var(--gold);
+      font-weight: 400;
+      display: block;
+    }
+    .proof-label {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.75rem;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+
+    /* PROBLEM */
+    .section {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 80px 40px;
+    }
+    .section-tag {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+    .section h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      line-height: 1.2;
+      font-weight: 400;
+      margin-bottom: 28px;
+    }
+    .section p {
+      font-family: 'Arial', sans-serif;
+      font-size: 1rem;
+      color: #ccc;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+    .section p strong { color: var(--white); }
+
+    /* MATH BOX */
+    .math-box {
+      background: var(--dark-gray);
+      border: 1px solid var(--border);
+      padding: 32px 36px;
+      margin: 40px 0;
+    }
+    .math-box h3 {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+    .math-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      font-family: 'Arial', sans-serif;
+      font-size: 0.95rem;
+    }
+    .math-row:last-child { border-bottom: none; font-weight: 700; color: var(--gold); font-size: 1.1rem; }
+    .math-row span:last-child { color: var(--white); }
+    .math-row:last-child span:last-child { color: var(--gold); }
+
+    /* WHAT YOU GET */
+    .features {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 80px 40px;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2px;
+      margin-top: 40px;
+    }
+    .feature-card {
+      background: var(--dark-gray);
+      padding: 32px 28px;
+    }
+    .feature-icon {
+      font-size: 1.5rem;
+      margin-bottom: 16px;
+    }
+    .feature-card h3 {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+    .feature-card p {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.875rem;
+      color: #999;
+      line-height: 1.7;
+    }
+
+    /* WHO IT'S FOR */
+    .who {
+      background: var(--dark-gray);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .who-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 80px 40px;
+    }
+    .who-list {
+      list-style: none;
+      margin-top: 32px;
+    }
+    .who-list li {
+      font-family: 'Arial', sans-serif;
+      font-size: 1rem;
+      color: #ccc;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .who-list li::before {
+      content: '→';
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+
+    /* TIERS */
+    .pricing {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 80px 40px;
+      text-align: center;
+    }
+    .pricing-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2px;
+      margin-top: 48px;
+      text-align: left;
+    }
+    .pricing-card {
+      background: var(--dark-gray);
+      padding: 36px 28px;
+      position: relative;
+    }
+    .pricing-card.featured {
+      background: #1c1810;
+      border: 1px solid var(--gold);
+    }
+    .featured-tag {
+      position: absolute;
+      top: -1px;
+      right: -1px;
+      background: var(--gold);
+      color: var(--black);
+      font-family: 'Arial', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+    }
+    .pricing-card h3 {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+    .price {
+      font-size: 2.4rem;
+      font-weight: 400;
+      margin-bottom: 4px;
+    }
+    .price-sub {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.8rem;
+      color: var(--gray);
+      margin-bottom: 24px;
+    }
+    .pricing-features {
+      list-style: none;
+      margin-bottom: 28px;
+    }
+    .pricing-features li {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.85rem;
+      color: #bbb;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .pricing-features li::before { content: '✓'; color: var(--gold); flex-shrink: 0; }
+    .btn-secondary {
+      display: block;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      padding: 14px;
+      text-align: center;
+      text-decoration: none;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: all 0.2s;
+    }
+    .btn-secondary:hover { background: var(--gold); color: var(--black); }
+    .btn-gold {
+      display: block;
+      background: var(--gold);
+      color: var(--black);
+      padding: 14px;
+      text-align: center;
+      text-decoration: none;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* FAQ */
+    .faq {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 80px 40px;
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      padding: 24px 0;
+    }
+    .faq-q {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .faq-a {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.875rem;
+      color: #999;
+      line-height: 1.7;
+    }
+
+    /* FINAL CTA */
+    .final-cta {
+      background: var(--dark-gray);
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 100px 40px;
+    }
+    .final-cta h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 400;
+      max-width: 560px;
+      margin: 0 auto 16px;
+      line-height: 1.2;
+    }
+    .final-cta p {
+      font-family: 'Arial', sans-serif;
+      font-size: 1rem;
+      color: var(--gray);
+      margin-bottom: 40px;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 40px;
+      text-align: center;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.75rem;
+      color: var(--gray);
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 16px 20px; }
+      .hero { padding: 60px 20px 60px; }
+      .section, .features, .pricing, .faq { padding: 60px 20px; }
+      .proof-bar { gap: 32px; padding: 24px 20px; }
+      .who-inner { padding: 60px 20px; }
+      .final-cta { padding: 60px 20px; }
+      footer { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">Luxis AI</div>
+    <a href="#deposit" class="nav-cta">Reserve Spot — $10</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hero-tag">AI Receptionist Blueprint — Founding Member</p>
+    <h1>Your Medspa Is Losing <em>$40,000 a Year</em> to Missed Calls.</h1>
+    <p class="hero-sub">
+      An AI receptionist answers every call, qualifies every lead, and books every appointment — 24 hours a day, 7 days a week. Join the founding member community launching this month.
+    </p>
+    <div class="cta-group">
+      <a href="#deposit" class="btn-primary">Reserve Your Spot — $10 Deposit</a>
+      <span class="cta-note">$10 deposit credited to first month. Cancel anytime.</span>
+      <span class="spots-left">⬛ 50 founding member spots — 38 remaining</span>
+    </div>
+  </section>
+
+  <!-- PROOF BAR -->
+  <div class="proof-bar">
+    <div class="proof-item">
+      <span class="proof-num">24/7</span>
+      <span class="proof-label">Call Coverage</span>
+    </div>
+    <div class="proof-item">
+      <span class="proof-num">&lt;2s</span>
+      <span class="proof-label">Answer Time</span>
+    </div>
+    <div class="proof-item">
+      <span class="proof-num">$0</span>
+      <span class="proof-label">Missed Revenue</span>
+    </div>
+    <div class="proof-item">
+      <span class="proof-num">$997</span>
+      <span class="proof-label">Done-For-You / Mo</span>
+    </div>
+  </div>
+
+  <!-- PROBLEM -->
+  <section class="section">
+    <p class="section-tag">The Problem</p>
+    <h2>Every Evening, Your Practice Loses Money It Never Knew It Had.</h2>
+    <p>
+      A potential patient calls your medspa at 6:47pm on a Tuesday. Your front desk left at 5. It rings four times, then voicemail.
+    </p>
+    <p>
+      <strong>They don't leave a message.</strong> They call the next practice on Google. By 7:15pm, that appointment is booked — just not with you.
+    </p>
+    <p>
+      This happens every evening. Every weekend. Every holiday. Every time your front desk is tied up with a patient who walked in.
+    </p>
+
+    <div class="math-box">
+      <h3>The Missed Call Math — Average Medspa</h3>
+      <div class="math-row">
+        <span>New inquiry calls per week</span>
+        <span>20 calls</span>
+      </div>
+      <div class="math-row">
+        <span>Calls going unanswered (30%)</span>
+        <span>6 per week</span>
+      </div>
+      <div class="math-row">
+        <span>Would-have-booked (conservative 40%)</span>
+        <span>2.4 appointments</span>
+      </div>
+      <div class="math-row">
+        <span>Average appointment value</span>
+        <span>$400</span>
+      </div>
+      <div class="math-row">
+        <span>Lost revenue per week</span>
+        <span>$960</span>
+      </div>
+      <div class="math-row">
+        <span>Lost revenue per year</span>
+        <span>$49,920</span>
+      </div>
+    </div>
+
+    <p>
+      That's almost <strong>$50,000 a year</strong> evaporating — not from bad marketing, not from poor service — just from nobody picking up the phone.
+    </p>
+  </section>
+
+  <!-- WHAT YOU GET -->
+  <section class="features">
+    <p class="section-tag" style="text-align:center">The Solution</p>
+    <h2 style="text-align:center; font-size:clamp(1.8rem,3.5vw,2.6rem); font-weight:400; line-height:1.2">
+      An AI That Never Misses a Call. Never Takes a Lunch Break. Never Goes Home.
+    </h2>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📞</div>
+        <h3>Answers Every Call</h3>
+        <p>AI picks up in under 2 seconds, 24/7. Sounds warm, natural, and professional — exactly like your front desk, without the gaps.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📅</div>
+        <h3>Books Directly to Your Calendar</h3>
+        <p>Qualifies the caller, checks availability, and books the appointment in real time — no double booking, no errors, no delays.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💬</div>
+        <h3>Handles Texts and DMs Too</h3>
+        <p>After-hours SMS, Instagram DMs, website chat — the AI handles every channel so nothing falls through the cracks.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Weekly Revenue Reports</h3>
+        <p>Know exactly how many calls were handled, how many appointments were booked, and the estimated revenue your AI recovered.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3>Set It and Forget It</h3>
+        <p>We handle the entire setup, integration, and ongoing optimization. You don't touch a thing. It just works.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🧠</div>
+        <h3>Learns Your Practice</h3>
+        <p>Trained on your services, pricing, FAQs, and tone. Your AI receptionist speaks your language from day one.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO IT'S FOR -->
+  <div class="who">
+    <div class="who-inner">
+      <p class="section-tag">Who This Is For</p>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.2rem); font-weight:400">This is for you if…</h2>
+      <ul class="who-list">
+        <li>You own or manage a medspa, aesthetic clinic, or cosmetic surgery practice and you know calls go unanswered after hours</li>
+        <li>You're an agency owner who wants to offer AI receptionist services to medspa or luxury service clients as recurring revenue</li>
+        <li>You've looked into AI solutions but found them too complicated, too expensive, or too generic for your niche</li>
+        <li>You want to stop losing $3,000–$8,000/month to missed appointments and finally fix it once and for all</li>
+        <li>You're an entrepreneur who wants to build a recurring revenue business helping luxury service businesses with AI</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PRICING -->
+  <section class="pricing" id="deposit">
+    <p class="section-tag">Founding Member Pricing</p>
+    <h2 style="font-size:clamp(1.8rem,3.5vw,2.6rem); font-weight:400">Choose Your Path</h2>
+    <p style="font-family:'Arial',sans-serif; color:#888; margin-top:12px; font-size:0.9rem">Founding member pricing locks forever for the first 50 spots.</p>
+
+    <div class="pricing-cards">
+      <!-- Blueprint Community -->
+      <div class="pricing-card">
+        <h3>Community</h3>
+        <div class="price">$97<span style="font-size:1rem; color:#888">/mo</span></div>
+        <div class="price-sub">Founding member rate — locked forever</div>
+        <ul class="pricing-features">
+          <li>Private Discord community</li>
+          <li>Weekly live training calls</li>
+          <li>Copy-paste setup templates</li>
+          <li>AI receptionist guides (DIY)</li>
+          <li>Sales scripts and objection handling</li>
+          <li>Direct access to Levi</li>
+        </ul>
+        <a href="https://stan.store" target="_blank" class="btn-secondary">Reserve with $10 Deposit</a>
+      </div>
+
+      <!-- Done With You -->
+      <div class="pricing-card featured">
+        <span class="featured-tag">Most Popular</span>
+        <h3>Done-With-You</h3>
+        <div class="price">$497<span style="font-size:1rem; color:#888"> one-time</span></div>
+        <div class="price-sub">3 live build sessions over 2 weeks</div>
+        <ul class="pricing-features">
+          <li>Everything in Community</li>
+          <li>3×2-hour Zoom build sessions</li>
+          <li>We build it with you, live</li>
+          <li>Full setup: VAPI + Cal.com + automation</li>
+          <li>30-day post-launch support</li>
+          <li>Option to upgrade to DFY after</li>
+        </ul>
+        <a href="https://stan.store" target="_blank" class="btn-gold">Reserve with $10 Deposit</a>
+      </div>
+
+      <!-- Done For You -->
+      <div class="pricing-card">
+        <h3>Done-For-You</h3>
+        <div class="price">$997<span style="font-size:1rem; color:#888">/mo</span></div>
+        <div class="price-sub">Full service — we handle everything</div>
+        <ul class="pricing-features">
+          <li>Complete AI receptionist setup</li>
+          <li>Voice, SMS, and calendar integration</li>
+          <li>Monthly optimization call</li>
+          <li>Weekly performance reports</li>
+          <li>Ongoing management and updates</li>
+          <li>Cancel anytime, no contracts</li>
+        </ul>
+        <a href="https://stan.store" target="_blank" class="btn-secondary">Reserve with $10 Deposit</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq">
+    <p class="section-tag">Questions</p>
+    <h2 style="font-size:clamp(1.6rem,3vw,2rem); font-weight:400; margin-bottom:32px">Frequently Asked</h2>
+
+    <div class="faq-item">
+      <p class="faq-q">Will patients know they're talking to AI?</p>
+      <p class="faq-a">That's your choice. We can program the AI to introduce itself as your "automated assistant" or by a custom name (like "Aria" or "Jade"). Most patients don't ask — they just care if someone helped them. The experience is designed to feel warm and human.</p>
+    </div>
+
+    <div class="faq-item">
+      <p class="faq-q">Does it work with my existing booking system?</p>
+      <p class="faq-a">It integrates with most calendar and booking systems including Google Calendar, Calendly, and major practice management software. We handle the integration during setup — you don't need to do anything technical.</p>
+    </div>
+
+    <div class="faq-item">
+      <p class="faq-q">What if the AI can't answer a question?</p>
+      <p class="faq-a">For complex medical questions or anything outside its training, the AI is programmed to say: "That's a great question — let me have a specialist call you back within [X hours]." It takes their contact info and flags it for your team. No bad experiences.</p>
+    </div>
+
+    <div class="faq-item">
+      <p class="faq-q">How long does setup take?</p>
+      <p class="faq-a">For Done-For-You clients, we're typically live within 5-7 business days of receiving your onboarding information. For Done-With-You, we complete setup over two weeks of sessions.</p>
+    </div>
+
+    <div class="faq-item">
+      <p class="faq-q">What's the $10 deposit for?</p>
+      <p class="faq-a">The deposit holds your founding member spot and is credited toward your first month. It also confirms your commitment — founding member pricing is a significant discount and we want it to go to people who will actually use it.</p>
+    </div>
+
+    <div class="faq-item">
+      <p class="faq-q">Can I cancel?</p>
+      <p class="faq-a">Yes, anytime with 30 days notice. No long-term contracts, no cancellation fees. We earn your business every month.</p>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <div class="final-cta">
+    <h2>Stop Losing Appointments to Voicemail.</h2>
+    <p>The fix takes less than a week. Reserve your founding member spot today.</p>
+    <a href="https://stan.store" target="_blank" class="btn-primary" style="display:inline-block">Reserve Your Spot — $10 Deposit</a>
+    <p style="margin-top:16px; font-size:0.8rem">38 founding member spots remaining. Price increases to $197/month after launch.</p>
+  </div>
+
+  <footer>
+    <p>© 2025 Luxis AI — AI Solutions for Luxury Service Businesses</p>
+    <p style="margin-top:8px"><a href="mailto:levi@luxisai.com" style="color:#888">levi@luxisai.com</a></p>
+  </footer>
+
+</body>
+</html>
