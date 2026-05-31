@@ -475,19 +475,21 @@ function submitQuiz(){
     method:'POST',
     headers:{'Content-Type':'application/json'},
     body: JSON.stringify({
-      Name: name,
-      Email: email,
-      Phone: phone,
-      Pain_Point: quizData.pain || '',
-      Hours_wasted: quizData.hours_wasted || '',
-      Goal: quizData.goal || '',
-      AI_experience: quizData.ai_experience || '',
-      Team_size: quizData.team_size || '',
-      Industry: quizData.industry || '',
-      Date: new Date().toISOString(),
-      Status: 'New',
-      Assessment_Scheduled: 'No',
-      Call_DateTime: ''
+      value: JSON.stringify({
+        name: name,
+        email: email,
+        phone: phone,
+        hours_wasted: quizData.hours_wasted || '',
+        biggest_drain: quizData.pain || '',
+        goal_90days: quizData.goal || '',
+        ai_experience: quizData.ai_experience || '',
+        team_size: quizData.team_size || '',
+        industry: quizData.industry || '',
+        date: new Date().toISOString(),
+        status: 'New',
+        assessment_scheduled: 'No',
+        call_datetime: ''
+      })
     })
   }).catch(function(){});
 }
